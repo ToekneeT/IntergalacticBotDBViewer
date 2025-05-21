@@ -1,0 +1,105 @@
+body {
+    background-color: #121212;
+    color: #ffffff;
+    font-family: 'Roboto', sans-serif;
+}
+
+.container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 20px;
+}
+
+h1 {
+    color: #e0e0e0;
+    font-weight: 300;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+form label {
+    color: #b0b0b0;
+    font-size: 0.9rem;
+}
+
+form input, form select, form button {
+    background-color: #2c2c2c;
+    color: #ffffff;
+    border: 1px solid #444444;
+}
+
+form input:focus, form select:focus {
+    box-shadow: none;
+    border-color: #6200ea;
+}
+
+form button {
+    background-color: #6200ea;
+    border: none;
+    transition: background-color 0.3s;
+}
+
+form button:hover {
+    background-color: #3700b3;
+}
+
+/* Table Styles */
+.table-dark {
+    background-color: #1e1e1e;
+    border-collapse: separate;
+    border-spacing: 0 10px;
+}
+
+.table-dark th {
+    color: #bdbdbd;
+    border-bottom: 1px solid #333333;
+    font-weight: 400;
+}
+
+.table-dark td {
+    color: #e0e0e0;
+    border-top: none;
+}
+
+.table-dark tbody tr {
+    transition: transform 0.2s;
+}
+
+.table-dark tbody tr:hover {
+    transform: scale(1.02);
+    background-color: #2a2a2a;
+}
+
+.table-hover tbody tr:hover td {
+    color: #ffffff;
+}
+
+.table-responsive {
+    overflow-x: auto;
+}
+
+/* Scrollbar Styling */
+table::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+table::-webkit-scrollbar-track {
+    background: #1e1e1e;
+}
+
+table::-webkit-scrollbar-thumb {
+    background-color: #6200ea;
+    border-radius: 5px;
+}
+
+.number {
+    font-family: 'Courier New', monospace;
+    color: #81c784;
+    text-align: right;
+}
+
+.display-1 {
+    font-weight: 700;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}

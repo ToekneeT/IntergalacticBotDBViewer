@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Intergalactic Home</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.3.0/mdb.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.3.0/mdb.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body class="bg-dark text-white">
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Database Viewer</a>
+            <button class="navbar-toggler" type="button" data-mdb-toggle="collapse" data-mdb-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('home') }}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('transactions') }}">Transactions</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('users') }}">Users</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('stats') }}">Stats</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('upgrades') }}">Upgrades</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('fortune') }}">Fortune</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('networth') }}">Networth</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('pets') }}">Pets</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container text-center">
+        <h1 class="display-3">Intergalactic Home</h1>
+
+        <!-- Display the fetched database entry -->
+        <div class="mt-5">
+            <h4>Current Pet</h4>
+            {% if row %}
+                <p>{{ row['pet_name'] }}</p>
+                <p class="cost">{{ row['cost'] }}</p>
+            {% else %}
+                <p>No pet data available.</p>
+            {% endif %}
+        </div>
+
+    <!-- Main Content -->
+    <div class="container text-center d-flex flex-column justify-content-center align-items-center" style="height: 40vh;">
+        <!-- <h1 class="display-1 text-white mb-5">Admin Page</h1> -->
+        <div class="d-flex flex-column gap-3">
+            <a href="{{ url_for('transactions') }}" class="btn btn-secondary btn-lg">Transactions</a>
+            <a href="{{ url_for('users') }}" class="btn btn-secondary btn-lg">Users</a>
+            <a href="{{ url_for('stats') }}" class="btn btn-secondary btn-lg">Stats</a>
+            <a href="{{ url_for('upgrades') }}" class="btn btn-secondary btn-lg">Upgrades</a>
+            <a href="{{ url_for('fortune') }}" class="btn btn-secondary btn-lg">Fortune</a>
+            <a href="{{ url_for('networth') }}" class="btn btn-secondary btn-lg">Networth</a>
+            <a href="{{ url_for('pets') }}" class="btn btn-secondary btn-lg">Pets</a>
+        </div>
+    </div>
+
+    <script>
+        // Format balance number with commas
+        document.addEventListener("DOMContentLoaded", function () {
+            let costElements = document.querySelectorAll(".cost");
+            costElements.forEach(el => {
+                el.innerText = Number(el.innerText).toLocaleString('en-US');
+            });
+        });
+    </script>
+
+</body>
+</html>

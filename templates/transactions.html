@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Transactions Viewer</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.3.0/mdb.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.3.0/mdb.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body class="bg-dark text-white">
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Database Viewer</a>
+            <button class="navbar-toggler" type="button" data-mdb-toggle="collapse" data-mdb-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('home') }}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('transactions') }}">Transactions</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('users') }}">Users</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('stats') }}">Stats</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('upgrades') }}">Upgrades</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('fortune') }}">Fortune</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('networth') }}">Networth</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('pets') }}">Pets</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Transactions</h1>
+
+        <!-- Query Form -->
+        <form method="post" class="bg-dark p-4 rounded-3 shadow-3 mb-5">
+            <div class="row mb-3">
+                <div class="col-md-4">
+                    <label for="trans_id" class="form-label">ID:</label>
+                    <input type="text" class="form-control" name="trans_id" placeholder="Enter Discord ID">
+                </div>
+
+                <div class="col-md-4">
+                    <label for="username" class="form-label">Username:</label>
+                    <input type="text" class="form-control" name="username" placeholder="Enter Username">
+                </div>
+
+                <div class="col-md-4">
+                    <label for="trans_type" class="form-label">Type:</label>
+                    <select name="trans_type" class="form-select">
+                        <option value="">-- Select Type --</option>
+                        <option value="gamble">Gamble</option>
+                        <option value="gift">Gift</option>
+                        <option value="credit">Credit</option>
+                        <option value="give">Give</option>
+                        <option value="claim">Claim</option>
+                        <option value="vault win">Vault Wins</option>
+                        <option value="fortune unlucky">Fortune Unlucky</option>
+                        <option value="fortune standard">Fortune Standard</option>
+                        <option value="fortune quality">Fortune Quality</option>
+                        <option value="pet">Pet Purchase</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-md-3">
+                    <label for="start_date" class="form-label">Start Date:</label>
+                    <input type="date" class="form-control" name="start_date">
+                </div>
+
+                <div class="col-md-3">
+                    <label for="end_date" class="form-label">End Date:</label>
+                    <input type="date" class="form-control" name="end_date">
+                </div>
+
+                <div class="col-md-3">
+                    <label for="start_time" class="form-label">Start Time:</label>
+                    <input type="time" class="form-control" name="start_time">
+                </div>
+
+                <div class="col-md-3">
+                    <label for="end_time" class="form-label">End Time:</label>
+                    <input type="time" class="form-control" name="end_time">
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Query</button>
+        </form>
+
+        <!-- Transactions Table -->
+        <div class="table-responsive">
+            <table class="table table-dark table-hover rounded-3 shadow-3">
+                <thead>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Username</th>
+                        <th scope="col">Type</th>
+                        <th scope="col">Amount</th>
+                        <th scope="col">Balance</th>
+                        <th scope="col">Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for row in rows %}
+                    <tr>
+                        <td>{{ row['discord_id'] }}</td>
+                        <td>{{ row['username'] }}</td>
+                        <td>{{ row['type'] }}</td>
+                        <td class="number">{{ row['transaction_amount'] }}</td>
+                        <td class="number">{{ row['balance'] }}</td>
+                        <td>{{ row['created_at'] }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        // Function to format numbers with commas
+        function formatNumbers() {
+            document.querySelectorAll('.number').forEach(element => {
+                let number = element.innerText;
+                element.innerText = Number(number).toLocaleString('en-US');
+            });
+        }
+    
+        // Format numbers when the page loads
+        window.onload = formatNumbers;
+    </script>
+
+</body>
+</html>
